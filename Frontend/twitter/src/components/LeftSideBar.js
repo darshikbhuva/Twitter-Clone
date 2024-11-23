@@ -1,0 +1,76 @@
+import React from "react";
+import { BsTwitterX } from "react-icons/bs";
+import { GoHomeFill } from "react-icons/go";
+import { IoSearch } from "react-icons/io5";
+import { IoMdNotifications } from "react-icons/io";
+import { IoMail } from "react-icons/io5";
+import { BsSlashSquare } from "react-icons/bs";
+import { FaUserGroup } from "react-icons/fa6";
+import { FaRegUser } from "react-icons/fa";
+import { CgMoreO } from "react-icons/cg";
+
+const iconList = [
+  {
+    icon: <GoHomeFill size={28} color="#DCDEDF" />,
+    label: "Home",
+  },
+  {
+    icon: <IoSearch size={28} color="#DCDEDF" />,
+    label: "Explore",
+  },
+  {
+    icon: <IoMdNotifications size={28} color="#DCDEDF" />,
+    label: "Notifications",
+  },
+  {
+    icon: <IoMail size={28} color="#DCDEDF" />,
+    label: "Messages",
+  },
+  {
+    icon: <BsSlashSquare size={28} color="#DCDEDF" />,
+    label: "Grok",
+  },
+  {
+    icon: <FaUserGroup size={28} color="#DCDEDF" />,
+    label: "Communities",
+  },
+  {
+    icon: <BsTwitterX size={28} color="#DCDEDF" />,
+    label: "Premium",
+  },
+  {
+    icon: <FaRegUser size={28} color="#DCDEDF" />,
+    label: "Profile",
+  },
+  {
+    icon: <CgMoreO size={28} color="#DCDEDF" />,
+    label: "More",
+  },
+];
+
+const LeftSideBar = () => {
+  return (
+    <div className="flex flex-col h-screen w-[20%] pl-0 pr-[16px] pt-1 sticky top-0 ">
+      <div className="py-4 px-4 rounded-full hover:bg-gray-100 hover:bg-opacity-15 w-fit cursor-pointer">
+        <BsTwitterX size={30} color="#DCDEDF" />
+      </div>
+      <div className="flex flex-col">
+        {iconList.map((item, key, i) => {
+          return (
+            <div className="" key={item.label}>
+              <div className="flex  items-center text-white cursor-pointer rounded-full hover:bg-gray-100 hover:bg-opacity-15 w-fit py-[10px] px-4">
+                {item.icon}
+                <p className="text-xl ml-5 text-[#DCDEDF]">{item.label}</p>
+              </div>
+            </div>
+          );
+        })}
+        <button className="w-full outline-none bg-[#1D9BF0] hover:bg-[#46a4e2] text-white mt-2 py-[13px] rounded-full font-bold text-lg ">
+          Post
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default LeftSideBar;
