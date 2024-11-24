@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import databaseConnection from "./config/database.js";
 import cookieParser from "cookie-parser";
-import userRoute from "./routes/userRoute.js";
+import authRouter from "./routes/userRoute.js";
 
 dotenv.config({ path: ".env" });
 const app = express();
@@ -31,4 +31,4 @@ app.use(cookieParser());
 
 //api
 
-app.use("/api/v1/user", userRoute);
+app.use("/", authRouter);
