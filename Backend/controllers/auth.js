@@ -2,6 +2,7 @@ import { User } from "../models/userSchema.js";
 import bcryptjs from "bcryptjs";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import { Tweet } from "../models/tweetSchema.js";
 
 dotenv.config({ path: ".env" });
 
@@ -85,6 +86,82 @@ export const Login = async (req, res) => {
         message: `Welcome back ${user.name}`,
         success: true,
       });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const Logout = (req, res) => {
+  return res
+    .cookie("token", null, { expiresIn: new Date(Date.now() - 1000) })
+    .json({
+      message: `user logout successfully`,
+      success: true,
+    });
+};
+
+export const Bookmark = async (req, res) => {
+  try {
+    const loggedInUserId = req.body.id;
+    const tweetId = req.params.id;
+    const user = await User.findById(loggedInUserId);
+
+    if (user.bookmark.includes(loggedInUserId)) {
+      //remove
+
+      await User.findByIdAndUpdate(loggedInUserId, {
+        $pull: { bookmark: tweetId },
+      });
+
+      return res.status(200).json({
+        message: "User remove bookmark from your tweet.",
+      });
+    } else {
+      //bookmark tweet
+
+      await User.findByIdAndUpdate(loggedInUserId, {
+        $push: { bookmark: tweetId },
+      });
+
+      return res.status(200).json({
+        message: "User add bookmark to your tweet.",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getMyProfile = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await User.findById(id).select("-password");
+
+    return res.status(200).json({
+      user,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getOtherUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const otherUsers = await User.find({ _id: { $ne: id } }).select(
+      "-password"
+    );
+
+    if (!otherUsers) {
+      return res.status(401).json({
+        message: "currently does not any other user",
+        status: false,
+      });
+    }
+
+    return res.status(401).json({
+      otherUsers,
+    });
   } catch (err) {
     console.log(err);
   }
