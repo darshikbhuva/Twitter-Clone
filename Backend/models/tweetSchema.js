@@ -19,6 +19,10 @@ const tweetSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    userDetails: {
+      type: Array,
+      default: [],
+    },
   },
   { timestamps: true }
 );

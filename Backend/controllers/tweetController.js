@@ -4,6 +4,7 @@ import { User } from "../models/userSchema.js";
 export const createTweet = async (req, res) => {
   try {
     const { description, id } = req.body;
+    const user = await User.findById(id);
 
     if (!description || !id) {
       return res.status(401).json({
@@ -15,6 +16,7 @@ export const createTweet = async (req, res) => {
     await Tweet.create({
       description,
       userId: id,
+      userDetails: user,
     });
 
     return res.status(201).json({
