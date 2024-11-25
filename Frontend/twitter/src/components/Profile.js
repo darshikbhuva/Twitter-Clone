@@ -1,15 +1,16 @@
 import React from "react";
 import Avatar from "react-avatar";
 import { IoMdArrowBack } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useGetProfile from "../hooks/useGetProfile";
 import { useSelector } from "react-redux";
 
 const Profile = () => {
-  const { user } = useSelector((store) => store.user);
+  const { profile } = useSelector((store) => store.user);
+  const { id } = useParams();
 
   // custom hook
-  useGetProfile(user?._id);
+  useGetProfile(id);
   return (
     <div className="w-[50%] border-x-[0.5px] border-opacity-25 border-[#DCDEDF]">
       <div>
@@ -21,7 +22,7 @@ const Profile = () => {
             <IoMdArrowBack />
           </Link>
           <div className="ml-4 ">
-            <h1 className="font-bold text-lg">Darshik</h1>
+            <h1 className="font-bold text-lg">{profile?.name}</h1>
             <p className="text-gray-500 text-sm">10 posts</p>
           </div>
         </div>
@@ -42,8 +43,8 @@ const Profile = () => {
           </button>
         </div>
         <div className="m-4">
-          <h1 className="font-bold text-xl">Darshik Bhuva</h1>
-          <p>@darshikbhuva</p>
+          <h1 className="font-bold text-xl">{profile?.name}</h1>
+          <p>{`@${profile?.username}`}</p>
         </div>
         <div className="m-4 text-sm">
           <p>Welcome to the official Twitter / X page of Darshik Bhuva.</p>

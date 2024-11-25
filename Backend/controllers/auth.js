@@ -160,7 +160,7 @@ export const getOtherUser = async (req, res) => {
       });
     }
 
-    return res.status(401).json({
+    return res.status(200).json({
       otherUsers,
     });
   } catch (err) {

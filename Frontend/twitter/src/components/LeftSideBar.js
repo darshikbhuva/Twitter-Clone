@@ -8,12 +8,10 @@ import { BsSlashSquare } from "react-icons/bs";
 import { FaUserGroup } from "react-icons/fa6";
 import { FaRegUser } from "react-icons/fa";
 import { CgMoreO } from "react-icons/cg";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const iconList = [
-  {
-    icon: <GoHomeFill size={28} color="#DCDEDF" />,
-    label: "Home",
-  },
   {
     icon: <IoSearch size={28} color="#DCDEDF" />,
     label: "Explore",
@@ -49,22 +47,36 @@ const iconList = [
 ];
 
 const LeftSideBar = () => {
+  const { user } = useSelector((store) => store.user);
   return (
     <div className="flex flex-col h-screen w-[20%] pl-0 pr-[16px] pt-1 sticky top-0 ">
       <div className="py-4 px-4 rounded-full hover:bg-gray-100 hover:bg-opacity-15 w-fit cursor-pointer">
         <BsTwitterX size={30} color="#DCDEDF" />
       </div>
       <div className="flex flex-col">
-        {iconList.map((item, key, i) => {
-          return (
-            <div className="" key={item.label}>
+        <Link to="/" className="">
+          <div className="flex  items-center text-white cursor-pointer rounded-full hover:bg-gray-100 hover:bg-opacity-15 w-fit py-[10px] px-4">
+            <GoHomeFill size={28} color="#DCDEDF" />
+            <p className="text-xl ml-5 text-[#DCDEDF]">Home</p>
+          </div>
+        </Link>
+        {iconList.map((item) =>
+          item.label === "Profile" ? (
+            <Link to={`/profile/${user._id}`} className="" key={item.label}>
+              <div className="flex  items-center text-white cursor-pointer rounded-full hover:bg-gray-100 hover:bg-opacity-15 w-fit py-[10px] px-4">
+                {item.icon}
+                <p className="text-xl ml-5 text-[#DCDEDF]">{item.label}</p>
+              </div>
+            </Link>
+          ) : (
+            <div key={item.label}>
               <div className="flex  items-center text-white cursor-pointer rounded-full hover:bg-gray-100 hover:bg-opacity-15 w-fit py-[10px] px-4">
                 {item.icon}
                 <p className="text-xl ml-5 text-[#DCDEDF]">{item.label}</p>
               </div>
             </div>
-          );
-        })}
+          )
+        )}
         <button className="w-full outline-none bg-[#1D9BF0] hover:bg-[#46a4e2] text-white mt-2 py-[13px] rounded-full font-bold text-lg ">
           Post
         </button>
