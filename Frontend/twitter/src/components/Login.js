@@ -1,10 +1,71 @@
 import React, { useState } from "react";
 import { FaXTwitter } from "react-icons/fa6";
+import axios from "axios";
+import { USER_API_END_POINT } from "../utils/constant";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const signUpHandler = () => {
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (isLogin) {
+      ///login
+      try {
+        const res = await axios.post(
+          `${USER_API_END_POINT}/login`,
+          {
+            email,
+            password,
+          },
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        );
+        navigate("/");
+        if (res.data.success) {
+          toast.success(res.data.message);
+        }
+      } catch (err) {
+        toast.success(err.response.data.message);
+        console.log(err);
+      }
+    } else {
+      //signup
+
+      try {
+        const res = await axios.post(
+          `${USER_API_END_POINT}/register`,
+          {
+            name,
+            username,
+            email,
+            password,
+          },
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        );
+        setIsLogin(true);
+        if (res.data.success) {
+          toast.success(res.data.message);
+        }
+      } catch (err) {
+        toast.success(err.response.data.message);
+        console.log(err);
+      }
+    }
+  };
+
+  const signUpHandler = (e) => {
     setIsLogin(!isLogin);
   };
   return (
@@ -29,27 +90,38 @@ const Login = () => {
                 <input
                   type="text"
                   placeholder="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="outline-blue-500 border border-gray-800 px-3 py-[6px] rounded-full my-1 font-semibold "
                 />
                 <input
                   type="text"
                   placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   className="outline-blue-500 border border-gray-800 px-3 py-[6px] rounded-full my-1 font-semibold "
                 />
               </>
             )}
 
             <input
-              type="text"
+              type="email"
               placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="outline-blue-500 border border-gray-800 px-3 py-[6px] rounded-full my-1 font-semibold "
             />
             <input
-              type="text"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               className="outline-blue-500 border border-gray-800 px-3 py-[6px] rounded-full my-1 font-semibold "
             />
-            <button className="bg-[#1D9BF0] hover:bg-[#46a4e2] border-none py-2 my-4 rounded-full text-lg text-white">
+            <button
+              className="bg-[#1D9BF0] hover:bg-[#46a4e2] border-none py-2 my-4 rounded-full text-lg text-white"
+              onClick={submitHandler}
+            >
               {isLogin ? "Login" : "Create Account"}
             </button>
             <h1 className="text-[#E7E9EA]">
