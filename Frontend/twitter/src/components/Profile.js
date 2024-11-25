@@ -2,8 +2,14 @@ import React from "react";
 import Avatar from "react-avatar";
 import { IoMdArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
+import useGetProfile from "../hooks/useGetProfile";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const { user } = useSelector((store) => store.user);
+
+  // custom hook
+  useGetProfile(user?._id);
   return (
     <div className="w-[50%] border-x-[0.5px] border-opacity-25 border-[#DCDEDF]">
       <div>
