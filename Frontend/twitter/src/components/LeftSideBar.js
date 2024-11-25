@@ -62,7 +62,7 @@ const LeftSideBar = () => {
         </Link>
         {iconList.map((item) =>
           item.label === "Profile" ? (
-            <Link to={`/profile/${user._id}`} className="" key={item.label}>
+            <Link to={`/profile/${user?._id}`} className="" key={item.label}>
               <div className="flex  items-center text-white cursor-pointer rounded-full hover:bg-gray-100 hover:bg-opacity-15 w-fit py-[10px] px-4">
                 {item.icon}
                 <p className="text-xl ml-5 text-[#DCDEDF]">{item.label}</p>

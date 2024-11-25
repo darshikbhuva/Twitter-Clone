@@ -8,9 +8,9 @@ import { useSelector } from "react-redux";
 const Profile = () => {
   const { profile } = useSelector((store) => store.user);
   const { id } = useParams();
-
   // custom hook
   useGetProfile(id);
+
   return (
     <div className="w-[50%] border-x-[0.5px] border-opacity-25 border-[#DCDEDF]">
       <div>

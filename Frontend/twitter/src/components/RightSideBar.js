@@ -1,6 +1,7 @@
 import React from "react";
 import Avatar from "react-avatar";
 import { CiSearch } from "react-icons/ci";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const RightSideBar = ({ otherUsers }) => {
@@ -38,7 +39,7 @@ const RightSideBar = ({ otherUsers }) => {
                   </p>
                 </div>
               </div>
-              <Link to="/profile/:id">
+              <Link to={`/profile/${items?._id}`}>
                 <button className="px-4 py-1 bg-white text-[#202327] rounded-full font-bold">
                   Profile
                 </button>
