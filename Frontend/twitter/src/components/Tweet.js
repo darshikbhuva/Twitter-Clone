@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { USER_API_END_POINT } from "../utils/constant";
 import { getRefresh } from "../redux/tweetSlice";
 import { MdOutlineDelete } from "react-icons/md";
+import { timeSince } from "../utils/constant";
 
 const Tweet = ({ tweets }) => {
   const { user } = useSelector((store) => store.user);
@@ -71,7 +72,8 @@ const Tweet = ({ tweets }) => {
             <div className="flex items-center">
               <h1 className="font-bold">{tweets?.userDetails[0]?.name}</h1>
               <p className="text-gray-500 text-sm ml-1">
-                @{tweets?.userDetails[0]?.username} . 1m
+                @{tweets?.userDetails[0]?.username} .{" "}
+                {timeSince(tweets?.createdAt)}
               </p>
             </div>
             <div>

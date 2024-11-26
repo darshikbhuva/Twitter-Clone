@@ -10,11 +10,11 @@ const persistConfig = {
   storage,
 };
 
-const reducer = combineReducers({
+const rootReducer = combineReducers({
   user: userSlice,
   tweet: tweetSlice,
 });
-// const persistedReducer = persistReducer(persistConfig, reducer);
+const reducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   // persistedReducer,
