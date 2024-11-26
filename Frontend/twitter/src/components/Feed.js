@@ -7,7 +7,7 @@ const Feed = () => {
   const { tweets } = useSelector((store) => store.tweet);
   return (
     <div className="flex flex-col border-x-[0.5px] border-opacity-25 border-[#DCDEDF] w-[50%]">
-      <div>
+      <div className="">
         <Createpost />
 
         {tweets?.map((items) => {

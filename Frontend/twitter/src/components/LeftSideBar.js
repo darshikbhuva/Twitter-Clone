@@ -61,12 +61,11 @@ const LeftSideBar = () => {
       const res = await axios.get(`${USER_API_END_POINT}/logout`, {
         withCredentials: true,
       });
-
-      navigate("/login");
-      toast.success(res.data.message);
       dispatch(getUser(null));
       dispatch(getOtherUser(null));
       dispatch(getMyProfile(null));
+      navigate("/login");
+      toast.success(res.data.message);
     } catch (err) {
       console.log(err);
     }

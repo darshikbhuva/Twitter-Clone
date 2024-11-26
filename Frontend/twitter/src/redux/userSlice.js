@@ -23,7 +23,7 @@ const userSlice = createSlice({
       if (state.user.following.includes(action.payload)) {
         // unFollow
         state.user.following = state.user.following.filter((itemsId) => {
-          return itemsId != action.payload;
+          return itemsId !== action.payload;
         });
       } else {
         // follow
