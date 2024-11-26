@@ -15,6 +15,7 @@ import { MdLogout } from "react-icons/md";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { getMyProfile, getOtherUser, getUser } from "../redux/userSlice";
+import { getAllTweets } from "../redux/tweetSlice";
 
 const iconList = [
   {
@@ -64,6 +65,7 @@ const LeftSideBar = () => {
       dispatch(getUser(null));
       dispatch(getOtherUser(null));
       dispatch(getMyProfile(null));
+      dispatch(getAllTweets(null));
       navigate("/login");
       toast.success(res.data.message);
     } catch (err) {

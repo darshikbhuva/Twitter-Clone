@@ -73,22 +73,30 @@ const Createpost = () => {
   };
   return (
     <div className="border-b-[0.5px] border-opacity-25 border-b-[#DCDEDF]">
-      <div className="flex border-b-[0.5px] border-opacity-25 border-b-[#DCDEDF] sticky top-0 backdrop-blur-sm   bg-white/0 ">
+      <div className="flex border-b-[0.5px] border-opacity-25 border-b-[#DCDEDF] sticky top-0    bg-white/0 ">
         <div
           onClick={forYouHandler}
-          className={`${
-            isActive ? "border-b-4 border-blue-600" : "null"
-          }px-28  py-4 hover:bg-gray-600 hover:bg-opacity-15 cursor-pointer hover:ease-in-out duration-[0.05s] text-center w-[50%] `}
+          className={`px-28  py-4 hover:bg-gray-600 hover:bg-opacity-15 cursor-pointer hover:ease-in-out duration-[0.05s] text-center w-[50%] `}
         >
-          <h1 className="font-semibold text-gray-500 text-lg">For you</h1>
+          <h1
+            className={`${
+              isActive ? "text-blue-600" : "text-gray-500"
+            }font-semibold text-lg`}
+          >
+            For you
+          </h1>
         </div>
         <div
           onClick={followingHandler}
-          className={`${
-            isActive ? "border-b-4 border-blue-600" : "null"
-          }px-28 py-4 hover:bg-gray-600 hover:bg-opacity-15 cursor-pointer hover:ease-in-out duration-[0.05s] text-center w-[50%]`}
+          className={`px-28 py-4 hover:bg-gray-600 hover:bg-opacity-15 cursor-pointer hover:ease-in-out duration-[0.05s] text-center w-[50%]`}
         >
-          <h1 className="font-semibold text-gray-500 text-lg">Following</h1>
+          <h1
+            className={`${
+              isActive ? "text-blue-600" : "text-gray-500"
+            }font-semibold  text-lg`}
+          >
+            Following
+          </h1>
         </div>
       </div>
       <div className="flex items-start px-3 gap-2 pt-4">
