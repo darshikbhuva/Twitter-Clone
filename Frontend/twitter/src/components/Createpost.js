@@ -71,29 +71,34 @@ const Createpost = () => {
   const followingHandler = () => {
     dispatch(getIsActive(false));
   };
+
   return (
     <div className="border-b-[0.5px] border-opacity-25 border-b-[#DCDEDF]">
-      <div className="flex border-b-[0.5px] border-opacity-25 border-b-[#DCDEDF] sticky top-0    bg-white/0 ">
+      <div className="flex border-b-[0.5px] border-opacity-25 border-b-[#DCDEDF] sticky top-0 bg-white/0 backdrop-blur-sm ">
         <div
           onClick={forYouHandler}
-          className={`px-28  py-4 hover:bg-gray-600 hover:bg-opacity-15 cursor-pointer hover:ease-in-out duration-[0.05s] text-center w-[50%] `}
+          className={`px-28 py-4 cursor-pointer text-center w-[50%] ${
+            isActive ? "border-b-2 border-blue-600" : ""
+          } hover:bg-gray-600 hover:bg-opacity-15`}
         >
           <h1
             className={`${
               isActive ? "text-blue-600" : "text-gray-500"
-            }font-semibold text-lg`}
+            } font-semibold text-lg`}
           >
             For you
           </h1>
         </div>
         <div
           onClick={followingHandler}
-          className={`px-28 py-4 hover:bg-gray-600 hover:bg-opacity-15 cursor-pointer hover:ease-in-out duration-[0.05s] text-center w-[50%]`}
+          className={`px-28 py-4 cursor-pointer text-center w-[50%] ${
+            !isActive ? "border-b-2 border-blue-600" : ""
+          } hover:bg-gray-600 hover:bg-opacity-15`}
         >
           <h1
             className={`${
-              isActive ? "text-blue-600" : "text-gray-500"
-            }font-semibold  text-lg`}
+              !isActive ? "text-blue-600" : "text-gray-500"
+            } font-semibold text-lg`}
           >
             Following
           </h1>
@@ -111,21 +116,24 @@ const Createpost = () => {
           <textarea
             type="text"
             placeholder="What is happening?!"
-            className="bg-transparent w-full placeholder:text-gray-700 placeholder:text-2xl outline-none text-xl border-b-[0.5px] border-opacity-25 border-[#DCDEDF] resize-none h-[80px]  "
+            className="bg-transparent w-full placeholder:text-gray-700 placeholder:text-2xl outline-none text-xl border-b-[0.5px] border-opacity-25 border-[#DCDEDF] resize-none h-[80px]"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
           <div className="flex items-center py-3">
-            {iconLogo.map((items) => {
+            {iconLogo.map((items, index) => {
               return (
-                <div className="cursor-pointer p-[8px] hover:bg-gray-600 hover:bg-opacity-15 rounded-full">
+                <div
+                  key={index}
+                  className="cursor-pointer p-[8px] hover:bg-gray-600 hover:bg-opacity-15 rounded-full"
+                >
                   {items.logo}
                 </div>
               );
             })}
 
             <button
-              className="ml-auto  bg-[#1D9BF0] hover:bg-[#46a4e2] text-white py-[5px] px-[15px] outline-none rounded-full font-semibold text-base text-center"
+              className="ml-auto bg-[#1D9BF0] hover:bg-[#46a4e2] text-white py-[5px] px-[15px] outline-none rounded-full font-semibold text-base text-center"
               onClick={submitHandler}
             >
               Post

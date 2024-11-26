@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const RightSideBar = ({ otherUsers }) => {
   return (
-    <div className=" sticky top-0 w-[25%]">
+    <div className="h-screen sticky top-0 w-[25%]">
       <div className="flex items-center p-2 bg-[#202327] rounded-full outline-none w-full mt-2">
         <CiSearch size="20px" />
         <input
