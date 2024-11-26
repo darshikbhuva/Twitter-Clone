@@ -8,8 +8,13 @@ import { BsSlashSquare } from "react-icons/bs";
 import { FaUserGroup } from "react-icons/fa6";
 import { FaRegUser } from "react-icons/fa";
 import { CgMoreO } from "react-icons/cg";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { USER_API_END_POINT } from "../utils/constant";
+import { MdLogout } from "react-icons/md";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { getMyProfile, getOtherUser, getUser } from "../redux/userSlice";
 
 const iconList = [
   {
@@ -48,6 +53,24 @@ const iconList = [
 
 const LeftSideBar = () => {
   const { user } = useSelector((store) => store.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const logoutHandler = async () => {
+    try {
+      const res = await axios.get(`${USER_API_END_POINT}/logout`, {
+        withCredentials: true,
+      });
+
+      navigate("/login");
+      toast.success(res.data.message);
+      dispatch(getUser(null));
+      dispatch(getOtherUser(null));
+      dispatch(getMyProfile(null));
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="flex flex-col h-screen w-[20%] pl-0 pr-[16px] pt-1 sticky top-0 ">
       <div className="py-4 px-4 rounded-full hover:bg-gray-100 hover:bg-opacity-15 w-fit cursor-pointer">
@@ -77,6 +100,12 @@ const LeftSideBar = () => {
             </div>
           )
         )}
+        <div onClick={logoutHandler} className="">
+          <div className="flex  items-center text-white cursor-pointer rounded-full hover:bg-gray-100 hover:bg-opacity-15 w-fit py-[10px] px-4">
+            <MdLogout size={28} color="#DCDEDF" />
+            <p className="text-xl ml-5 text-[#DCDEDF]">Logout</p>
+          </div>
+        </div>
         <button className="w-full outline-none bg-[#1D9BF0] hover:bg-[#46a4e2] text-white mt-2 py-[13px] rounded-full font-bold text-lg ">
           Post
         </button>
