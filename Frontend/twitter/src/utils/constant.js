@@ -1,6 +1,6 @@
-export const USER_API_END_POINT = "http://localhost:8080";
+export const USER_API_END_POINT = "https://twitter-clone-e0nm.onrender.com";
 
-export const TWEET_API_END_POINT = "http://localhost:8080";
+export const TWEET_API_END_POINT = "https://twitter-clone-e0nm.onrender.com";
 
 export const timeSince = (timestamp) => {
   let time = Date.parse(timestamp);
