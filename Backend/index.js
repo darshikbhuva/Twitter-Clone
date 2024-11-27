@@ -5,10 +5,12 @@ import cookieParser from "cookie-parser";
 import authRouter from "./routes/userRoute.js";
 import tweetRouter from "./routes/tweetRoute.js";
 import cors from "cors";
+import path from "path";
 
 dotenv.config({ path: ".env" });
 const app = express();
 const port = process.env.PORT;
+const _dirname = path.resolve();
 
 databaseConnection()
   .then(() => {
@@ -42,3 +44,10 @@ app.use(cors(corsOptions));
 
 app.use("/", authRouter);
 app.use("/", tweetRouter);
+
+app.use(express.static(path.join(_dirname, "/Frontend/twitter/build")));
+app.get("*", (req, res) => {
+  res.sendFile(
+    path.resolve(_dirname, "Frontend", "twitter", "build", "index.html")
+  );
+});
